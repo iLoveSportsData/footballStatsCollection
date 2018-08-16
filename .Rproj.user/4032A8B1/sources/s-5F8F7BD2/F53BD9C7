@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1534423351462.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F53BD9C7",
+    "lastKnownWriteTime" : 1534174503,
+    "last_content_update" : 1534174503,
+    "path" : "D:/Daniel/football_stats/data_work.R",
+    "project_path" : "data_work.R",
+    "properties" : {
+        "cursorPosition" : "91,74",
+        "scrollLine" : "64"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
