@@ -13,7 +13,7 @@ library(DT)
 #                               load data                                #
 #------------------------------------------------------------------------#
 
-source("./data_work.R")
+source("/srv/shiny-server/footballStatsCollection/data_work.R")
 
 #------------------------------------------------------------------------#
 #                               Shiny app                                #
@@ -51,7 +51,7 @@ ui <- fluidPage(
       
       tabPanel("About this App",
                br(),
-               includeMarkdown("./intro.rmd")
+               includeMarkdown("/srv/shiny-server/footballStatsCollection/intro.rmd")
       ),
       
       tabPanel("Goals",
