@@ -8,7 +8,7 @@ output: html_document
 
 Inspired by the **WorldCupBook** of the Twitter Tipsters @InplayMan, @cornersbychris and @HouseOfCardsTip, I was thinking about how to get all these stats collected and automatically updated with the newest results. @InPlayMan offers his great MegaStatPack, but it's not easy to use if you search for teams or if you want to sort data. So I decided to write my own application using **R Shiny**. Since I would love to have some feedback (@iLoveSportsData), I'll invest to run it on a public server instead of only running it locally. Some detailed information about the app:
 
-1. Data come from http://football-data.co.uk. Many thanks to @12Xpert for his great work.
+1. Data come from http://football-data.co.uk and are updated regularly after game days. Many thanks to @12Xpert for his great work.
 
 2. Currently, data about goals, cards, corners and referees are included. You'll find averages and share of games with a certain number of goals, cards or corners. 
 
