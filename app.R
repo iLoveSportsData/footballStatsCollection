@@ -230,17 +230,18 @@ server <- function(input, output, session) {
   })
   
   output$table_goals_ft <- DT::renderDataTable({
-    data_goals_app()[, c("HomeTeam", "place", "goals_per_game",  "share_over0.5FT_total_goals", "share_over1.5FT_total_goals", 
-                         "share_over2.5FT_total_goals", "share_over3.5FT_total_goals")] %>%
+    data_goals_app()[, c("HomeTeam", "place", "no_games_played", "goals_per_game",  "share_over0.5FT_total_goals", 
+                         "share_over1.5FT_total_goals", "share_over2.5FT_total_goals", "share_over3.5FT_total_goals")] %>%
       datatable(
         style = "bootstrap",
-        colnames = c("Team", "Playing site", "Average goals per game", "% of games >0.5 match goals", "% of games >1.5 match goals",
-                     "% of games >2.5 match goals", "% of games >3.5 match goals"),
+        colnames = c("Team", "Playing site", "Games played", "Average goals per game", "% of games >0.5 match goals", 
+                     "% of games >1.5 match goals", "% of games >2.5 match goals", "% of games >3.5 match goals"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 40, 
                        columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
                                          list(targets = c(1), visible = TRUE, width = "60"),
-                                         list(targets = c(2), visible = TRUE, width = "80"),
-                                         list(targets = c(3:6), visible = TRUE, width = "110"))),
+                                         list(targets = c(2), visible = TRUE, width = "60"),
+                                         list(targets = c(3), visible = TRUE, width = "80"),
+                                         list(targets = c(4:7), visible = TRUE, width = "110"))),
                                          rownames = FALSE) %>%
       formatRound(columns = c("goals_per_game"), 2) %>% 
       formatPercentage(c("share_over0.5FT_total_goals", "share_over1.5FT_total_goals", "share_over2.5FT_total_goals", 
@@ -256,17 +257,17 @@ server <- function(input, output, session) {
   })
   
   output$table_teamgoals_ft <- DT::renderDataTable({
-    data_goals_app()[, c("HomeTeam", "place", "teamgoals_per_game", "share_over0.5FT_team_goals", "share_over1.5FT_team_goals", 
-                         "share_over2.5FT_team_goals")] %>%
+    data_goals_app()[, c("HomeTeam", "place", "no_games_played", "teamgoals_per_game", "share_over0.5FT_team_goals", 
+                         "share_over1.5FT_team_goals", "share_over2.5FT_team_goals")] %>%
       datatable(
         style = "bootstrap",
-        colnames = c("Team", "Playing site", "Average goals per game", "% of games >0.5 team goals", "% of games >1.5 team goals", 
-                     "% of games >2.5 team goals"),
+        colnames = c("Team", "Playing site", "Games played", "Average goals per game", "% of games >0.5 team goals", 
+                     "% of games >1.5 team goals", "% of games >2.5 team goals"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 40, 
                        columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                         list(targets = c(1), visible = TRUE, width = "60"),
-                                         list(targets = c(2), visible = TRUE, width = "80"),
-                                         list(targets = c(3:5), visible = TRUE, width = "110"))),
+                                         list(targets = c(1:2), visible = TRUE, width = "60"),
+                                         list(targets = c(3), visible = TRUE, width = "80"),
+                                         list(targets = c(4:6), visible = TRUE, width = "110"))),
         rownames = FALSE) %>%
       formatRound(columns = c("teamgoals_per_game"), 2) %>% 
       formatPercentage(c("share_over0.5FT_team_goals", "share_over1.5FT_team_goals", "share_over2.5FT_team_goals"), 0)
@@ -281,16 +282,16 @@ server <- function(input, output, session) {
   })
   
   output$table_goals_firsthalf <- DT::renderDataTable({
-    data_goals_app()[, c("HomeTeam", "place", "firsthalfgoals_per_game", "share_over0.5HT_total_goals", 
+    data_goals_app()[, c("HomeTeam", "place", "no_games_played", "firsthalfgoals_per_game", "share_over0.5HT_total_goals", 
                          "share_over1.5HT_total_goals", "share_over2.5HT_total_goals")] %>%
       datatable(
         style = "bootstrap",
-        colnames = c("Team", "Playing site", "Average first half goals per game", "% of games >0.5 first half goals", 
+        colnames = c("Team", "Playing site", "Games played", "Average first half goals per game", "% of games >0.5 first half goals", 
                      "% of games >1.5 first half goals", "% of games >2.5 first half  goals"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 40, 
                        columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                         list(targets = c(1), visible = TRUE, width = "60"),
-                                         list(targets = c(2:5), visible = TRUE, width = "120"))),
+                                         list(targets = c(1:2), visible = TRUE, width = "60"),
+                                         list(targets = c(3:6), visible = TRUE, width = "120"))),
         rownames = FALSE) %>%
       formatRound(columns = c("firsthalfgoals_per_game"), 2) %>% 
       formatPercentage(c("share_over0.5HT_total_goals", "share_over1.5HT_total_goals", "share_over2.5HT_total_goals"), 0)
@@ -305,16 +306,17 @@ server <- function(input, output, session) {
   })
   
   output$table_teamgoals_firsthalf <- DT::renderDataTable({
-    data_goals_app()[, c("HomeTeam", "place", "firsthalfteamgoals_per_game", "share_over0.5HT_team_goals", 
+    data_goals_app()[, c("HomeTeam", "place", "no_games_played", "firsthalfteamgoals_per_game", "share_over0.5HT_team_goals", 
                          "share_over1.5HT_team_goals", "share_over2.5HT_team_goals")] %>%
       datatable(
         style = "bootstrap",
-        colnames = c("Team", "Playing site", "Average first half team goals per game", "% of games >0.5 first half team goals", 
-                     "% of games >1.5 first half team goals", "% of games >2.5 first half team goals"),
+        colnames = c("Team", "Playing site", "Games played", "Average first half team goals per game", 
+                     "% of games >0.5 first half team goals", "% of games >1.5 first half team goals", 
+                     "% of games >2.5 first half team goals"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 40, 
                        columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                         list(targets = c(1), visible = TRUE, width = "60"),
-                                         list(targets = c(2:5), visible = TRUE, width = "120"))),
+                                         list(targets = c(1:2), visible = TRUE, width = "60"),
+                                         list(targets = c(3:6), visible = TRUE, width = "120"))),
         rownames = FALSE) %>%
       formatRound(columns = c("firsthalfteamgoals_per_game"), 2) %>% 
       formatPercentage(c("share_over0.5HT_team_goals", "share_over1.5HT_team_goals", 
@@ -330,16 +332,16 @@ server <- function(input, output, session) {
   })
   
   output$table_goals_secondhalf <- DT::renderDataTable({
-    data_goals_app()[, c("HomeTeam", "place", "secondhalfgoals_per_game", "share_over0.5secondhalf_total_goals", 
+    data_goals_app()[, c("HomeTeam", "place", "no_games_played", "secondhalfgoals_per_game", "share_over0.5secondhalf_total_goals", 
                          "share_over1.5secondhalf_total_goals", "share_over2.5secondhalf_total_goals")] %>%
       datatable(
         style = "bootstrap",
-        colnames = c("Team", "Playing site", "Average second half goals per game", "% of games >0.5 second half goals", 
+        colnames = c("Team", "Playing site", "Games played", "Average second half goals per game", "% of games >0.5 second half goals", 
                      "% of games >1.5 second half goals", "% of games >2.5 second half goals"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 40, 
                        columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                         list(targets = c(1), visible = TRUE, width = "60"),
-                                         list(targets = c(2:5), visible = TRUE, width = "120"))),
+                                         list(targets = c(1:2), visible = TRUE, width = "60"),
+                                         list(targets = c(3:6), visible = TRUE, width = "120"))),
         rownames = FALSE) %>%
       formatRound(columns = c("secondhalfgoals_per_game"), 2) %>% 
       formatPercentage(c("share_over0.5secondhalf_total_goals", "share_over1.5secondhalf_total_goals",
@@ -355,17 +357,17 @@ server <- function(input, output, session) {
   })
   
   output$table_teamgoals_secondhalf <- DT::renderDataTable({
-    data_goals_app()[, c("HomeTeam", "place", "secondhalfteamgoals_per_game", "share_over0.5secondhalf_team_goals", 
+    data_goals_app()[, c("HomeTeam", "place", "no_games_played", "secondhalfteamgoals_per_game", "share_over0.5secondhalf_team_goals", 
                          "share_over1.5secondhalf_team_goals", "share_over2.5secondhalf_team_goals")] %>%
       datatable(
         style = "bootstrap",
-        colnames = c("Team", "Playing site", "Average second half team goals per game", 
+        colnames = c("Team", "Playing site", "Games played", "Average second half team goals per game", 
                      "% of games >0.5 second half team goals", "% of games >1.5 second half team goals", 
                      "% of games >2.5 second half team goals"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 40, 
                        columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                         list(targets = c(1), visible = TRUE, width = "60"),
-                                         list(targets = c(2:5), visible = TRUE, width = "120"))),
+                                         list(targets = c(1:2), visible = TRUE, width = "60"),
+                                         list(targets = c(3:6), visible = TRUE, width = "120"))),
         rownames = FALSE) %>%
       formatRound(columns = c("secondhalfteamgoals_per_game"), 2) %>% 
       formatPercentage(c("share_over0.5secondhalf_team_goals", "share_over1.5secondhalf_team_goals",
@@ -381,14 +383,14 @@ server <- function(input, output, session) {
   })
   
   output$table_goals_btts <- DT::renderDataTable({
-    data_goals_app()[, c("HomeTeam", "place", "share_btts")] %>%
+    data_goals_app()[, c("HomeTeam", "place", "no_games_played", "share_btts")] %>%
       datatable(
         style = "bootstrap",
-        colnames = c("Team", "Playing site", "% of games both teams scored"),
+        colnames = c("Team", "Playing site", "Games played", "% of games both teams scored"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 40, 
                        columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                         list(targets = c(1), visible = TRUE, width = "60"),
-                                         list(targets = c(2), visible = TRUE, width = "110"))), 
+                                         list(targets = c(1:2), visible = TRUE, width = "60"),
+                                         list(targets = c(3), visible = TRUE, width = "110"))), 
         rownames = FALSE) %>%
       formatPercentage(c("share_btts"), 0)
   })
@@ -398,18 +400,18 @@ server <- function(input, output, session) {
   #------------------------------------------------------------------------------------#
   
   output$table_match_cards <- DT::renderDataTable({
-    data_cards_app()[, c("HomeTeam", "place", "total_cards_per_game", "share_over0.5_total_cards", 
+    data_cards_app()[, c("HomeTeam", "place", "no_games_played", "total_cards_per_game", "share_over0.5_total_cards", 
                          "share_over1.5_total_cards", "share_over2.5_total_cards", "share_over3.5_total_cards", 
                          "share_over4.5_total_cards", "share_over5.5_total_cards")] %>%
       datatable(
         style = "bootstrap",
-        colnames = c("Team", "Playing site", "Average cards per game", "% of games >0.5 cards", 
+        colnames = c("Team", "Playing site", "Games played", "Average cards per game", "% of games >0.5 cards", 
                      "% of games >1.5 cards", "% of games >2.5 cards", 
                      "% of games >3.5 cards", "% of games >4.5 cards", "% of games >5.5 cards"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 500, 
                        columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                         list(targets = c(1), visible = TRUE, width = "60"),
-                                         list(targets = c(2:8), visible = TRUE, width = "130"))), 
+                                         list(targets = c(1:2), visible = TRUE, width = "60"),
+                                         list(targets = c(3:9), visible = TRUE, width = "130"))), 
         rownames = FALSE) %>%
       formatRound(columns = c("total_cards_per_game"), 2) %>% 
       formatPercentage(c("share_over0.5_total_cards", "share_over1.5_total_cards", "share_over2.5_total_cards", 
@@ -421,18 +423,18 @@ server <- function(input, output, session) {
   #------------------------------------------------------------------------------------#
   
  output$table_team_cards <- DT::renderDataTable({
-    data_cards_app()[, c("HomeTeam", "place", "team_cards_per_game", "share_over0.5_team_cards", 
+    data_cards_app()[, c("HomeTeam", "place", "no_games_played", "team_cards_per_game", "share_over0.5_team_cards", 
                          "share_over1.5_team_cards", 
                          "share_over2.5_team_cards", "share_over3.5_team_cards")] %>%
       datatable(
         style = "bootstrap",
-        colnames = c("Team", "Playing site", "Average team cards per game", "% of games >0.5 team cards", 
+        colnames = c("Team", "Playing site", "Games played", "Average team cards per game", "% of games >0.5 team cards", 
                      "% of games >1.5 team cards", 
                      "% of games >2.5 team cards", "% of games >3.5 team cards"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 500, 
                        columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                         list(targets = c(1), visible = TRUE, width = "60"),
-                                         list(targets = c(2:6), visible = TRUE, width = "130"))), 
+                                         list(targets = c(1:2), visible = TRUE, width = "60"),
+                                         list(targets = c(3:7), visible = TRUE, width = "130"))), 
         rownames = FALSE) %>%
       formatRound(columns = c("team_cards_per_game"), 2) %>% 
       formatPercentage(c("share_over0.5_team_cards", "share_over1.5_team_cards", "share_over2.5_team_cards", 
@@ -444,22 +446,22 @@ server <- function(input, output, session) {
  #------------------------------------------------------------------------------------#
  
  output$table_match_corners <- DT::renderDataTable({
-   data_corners_app()[, c("HomeTeam", "place", "total_corners_per_game", "share_over0.5_total_corners", 
+   data_corners_app()[, c("HomeTeam", "place", "no_games_played", "total_corners_per_game", "share_over0.5_total_corners", 
                         "share_over1.5_total_corners", "share_over2.5_total_corners", "share_over3.5_total_corners", 
                         "share_over4.5_total_corners", "share_over5.5_total_corners", "share_over6.5_total_corners",
                         "share_over7.5_total_corners", "share_over8.5_total_corners", "share_over9.5_total_corners",
                         "share_over10.5_total_corners", "share_over11.5_total_corners", "share_over12.5_total_corners")] %>%
      datatable(
        style = "bootstrap",
-       colnames = c("Team", "Playing site", "Average corners per game", "% of games >0.5 corners", 
+       colnames = c("Team", "Playing site", "Games played", "Average corners per game", "% of games >0.5 corners", 
                     "% of games >1.5 corners", "% of games >2.5 corners", "% of games >3.5 corners", 
                     "% of games >4.5 corners", "% of games >5.5 corners", "% of games >6.5 corners", 
                     "% of games >7.5 corners", "% of games >8.5 corners", "% of games >9.5 corners",
                     "% of games >10.5 corners", "% of games >11.5 corners", "% of games >12.5 corners"),
        options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 500, 
                       columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                        list(targets = c(1), visible = TRUE, width = "60"),
-                                        list(targets = c(2:15), visible = TRUE, width = "130"))), 
+                                        list(targets = c(1:2), visible = TRUE, width = "60"),
+                                        list(targets = c(3:16), visible = TRUE, width = "130"))), 
        rownames = FALSE) %>%
      formatRound(columns = c("total_corners_per_game"), 2) %>% 
      formatPercentage(c("share_over0.5_total_corners", "share_over1.5_total_corners", "share_over2.5_total_corners", 
@@ -474,20 +476,20 @@ server <- function(input, output, session) {
  #------------------------------------------------------------------------------------#
  
  output$table_team_corners <- DT::renderDataTable({
-   data_corners_app()[, c("HomeTeam", "place", "team_corners_per_game", "share_over0.5_team_corners", 
+   data_corners_app()[, c("HomeTeam", "place", "no_games_played", "team_corners_per_game", "share_over0.5_team_corners", 
                         "share_over1.5_team_corners", "share_over2.5_team_corners", "share_over3.5_team_corners",
                         "share_over4.5_team_corners", "share_over5.5_team_corners","share_over6.5_team_corners",
                         "share_over7.5_team_corners", "share_over8.5_team_corners")] %>%
      datatable(
        style = "bootstrap",
-       colnames = c("Team", "Playing site", "Average team corners per game", "% of games >0.5 team corners", 
+       colnames = c("Team", "Playing site", "Games played", "Average team corners per game", "% of games >0.5 team corners", 
                     "% of games >1.5 team corners", "% of games >2.5 team corners", "% of games >3.5 team corners",
                     "% of games >4.5 team corners", "% of games >5.5 team corners", "% of games >6.5 team corners",
                     "% of games >7.5 team corners", "% of games >8.5 team corners"),
        options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 500, 
                       columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                        list(targets = c(1), visible = TRUE, width = "60"),
-                                        list(targets = c(2:11), visible = TRUE, width = "130"))), 
+                                        list(targets = c(1:2), visible = TRUE, width = "60"),
+                                        list(targets = c(3:12), visible = TRUE, width = "130"))), 
        rownames = FALSE) %>%
      formatRound(columns = c("team_corners_per_game"), 2) %>% 
      formatPercentage(c("team_corners_per_game", "share_over0.5_team_corners", 

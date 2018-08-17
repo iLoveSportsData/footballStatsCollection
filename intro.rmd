@@ -39,3 +39,4 @@ As already written at the beginning, I want to share this app in order to see if
 * add other leagues, where data are available on http://football-data.co.uk.
 * add historical data (not for betting, but to be more complete).
 * add a collection for tennis data, which are publicly available (e.g. http://tennis-data.co.uk/).
+

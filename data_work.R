@@ -140,7 +140,8 @@ data_full_ref$Div <- as.factor(data_full_ref$Div)
 
 data_goals <- data_full %>% 
   group_by(Div, HomeTeam) %>% 
-  summarize(share_btts = sum(btts) / length(btts),
+  summarize(no_games_played = length(btts),
+            share_btts = sum(btts) / length(btts),
             goals_per_game = sum(total_FTgoals) / length(btts),
             teamgoals_per_game = sum(FTHG) / length(btts),
             firsthalfgoals_per_game = sum(total_HTgoals) / length(btts),
@@ -169,7 +170,8 @@ data_goals <- data_full %>%
 
 data_goals_place <- data_full %>% 
   group_by(Div, HomeTeam, place) %>% 
-    summarize(share_btts_place = sum(btts) / length(btts),
+    summarize(no_games_played = length(btts),
+              share_btts_place = sum(btts) / length(btts),
               goals_per_game_place = sum(total_FTgoals) / length(btts),
               teamgoals_per_game_place = sum(FTHG) / length(btts),
               firsthalfgoals_per_game_place = sum(total_HTgoals) / length(btts),
@@ -200,7 +202,7 @@ data_goals_place <- data_full %>%
 data_goals$place <- paste0("all")
 
 ## change position in order to have both datasets equal
-data_goals_place <- data_goals_place[, c("Div", "HomeTeam", "share_btts_place", "goals_per_game_place", 
+data_goals_place <- data_goals_place[, c("Div", "HomeTeam", "no_games_played", "share_btts_place", "goals_per_game_place", 
                                          "teamgoals_per_game_place", "firsthalfgoals_per_game_place", 
                                          "firsthalfteamgoals_per_game_place", "secondhalfgoals_per_game_place",
                                          "secondhalfteamgoals_per_game_place", "share_over0.5HT_total_goals_place", 
@@ -225,7 +227,8 @@ data_goals <- bind_rows(data_goals, data_goals_place)
 
 data_cards <- data_full %>% 
   group_by(Div, HomeTeam) %>% 
-  summarize(team_cards_per_game = sum(c(HY, HR)) / length(btts),
+  summarize(no_games_played = length(btts),
+            team_cards_per_game = sum(c(HY, HR)) / length(btts),
             share_over0.5_team_cards = sum(HY > 0 | HR > 0) / length(btts),
             share_over1.5_team_cards = sum(HY > 1 | HR > 1) / length(btts),
             share_over2.5_team_cards = sum(HY > 2 | HR > 2) / length(btts),
@@ -241,7 +244,8 @@ data_cards <- data_full %>%
 
 data_cards_place <- data_full %>% 
   group_by(Div, HomeTeam, place) %>% 
-  summarize(team_cards_per_game_place = sum(c(HY, HR)) / length(btts),
+  summarize(no_games_played = length(btts),
+            team_cards_per_game_place = sum(c(HY, HR)) / length(btts),
             share_over0.5_team_cards_place = sum(HY > 0 | HR > 0) / length(btts),
             share_over1.5_team_cards_place = sum(HY > 1 | HR > 1) / length(btts),
             share_over2.5_team_cards_place = sum(HY > 2 | HR > 2) / length(btts),
@@ -259,7 +263,7 @@ data_cards_place <- data_full %>%
 data_cards$place <- paste0("all")
 
 ## change position in order to have both datasets equal
-data_cards_place <- data_cards_place[, c("Div", "HomeTeam", "team_cards_per_game_place", "share_over0.5_team_cards_place", 
+data_cards_place <- data_cards_place[, c("Div", "HomeTeam", "no_games_played", "team_cards_per_game_place", "share_over0.5_team_cards_place", 
                                          "share_over1.5_team_cards_place", "share_over2.5_team_cards_place", 
                                          "share_over2.5_team_cards_place",
                                          "share_team_red_card_place", "total_cards_per_game_place", 
@@ -277,7 +281,8 @@ data_cards <- bind_rows(data_cards, data_cards_place)
 
 data_corners <- data_full %>% 
   group_by(Div, HomeTeam) %>% 
-  summarize(team_corners_per_game = sum(HC) / length(btts),
+  summarize(no_games_played = length(btts),
+            team_corners_per_game = sum(HC) / length(btts),
             share_over0.5_team_corners = sum(HC > 0) / length(btts),
             share_over1.5_team_corners = sum(HC > 1) / length(btts),
             share_over2.5_team_corners = sum(HC > 2) / length(btts),
@@ -304,7 +309,8 @@ data_corners <- data_full %>%
 
 data_corners_place <- data_full %>% 
   group_by(Div, HomeTeam, place) %>% 
-  summarize(team_corners_per_game_place = sum(HC) / length(btts),
+  summarize(no_games_played = length(btts),
+            team_corners_per_game_place = sum(HC) / length(btts),
             share_over0.5_team_corners_place = sum(HC > 0) / length(btts),
             share_over1.5_team_corners_place = sum(HC > 1) / length(btts),
             share_over2.5_team_corners_place = sum(HC > 2) / length(btts),
@@ -333,7 +339,7 @@ data_corners_place <- data_full %>%
 data_corners$place <- paste0("all")
 
 ## change position in order to have both datasets equal
-data_corners_place <- data_corners_place[, c("Div", "HomeTeam", "team_corners_per_game_place", 
+data_corners_place <- data_corners_place[, c("Div", "HomeTeam", "no_games_played", "team_corners_per_game_place", 
                                              "share_over0.5_team_corners_place", "share_over1.5_team_corners_place", 
                                              "share_over2.5_team_corners_place", "share_over3.5_team_corners_place", 
                                              "share_over4.5_team_corners_place", "share_over5.5_team_corners_place", 
