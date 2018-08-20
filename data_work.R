@@ -40,6 +40,9 @@ data_refs <- bind_rows(data, data_refs)
 ##  add columns for total cards, goals, corners, cards, shots, btts
 
 data <- data %>%
+  filter(!is.na(FTHG))
+
+data <- data %>%
   mutate(total_HTgoals = rowSums(data[, c("HTHG", "HTAG")])) %>% 
   mutate(total_FTgoals = rowSums(data[, c("FTHG", "FTAG")])) %>% 
   mutate(total_shots = rowSums(data[, c("HS", "AS")])) %>% 
