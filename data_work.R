@@ -70,6 +70,8 @@ away_teams$place <- paste0("away")
 names(away_teams) <- names(home_teams)
 data_full <- bind_rows(home_teams, away_teams)
 
+data_full$Div1 <- data_full$Div
+
 ##  change league names  ##
 data_full$Div <- str_replace(data_full$Div, "E0", "England - Premier League")
 data_full$Div <- str_replace(data_full$Div, "E1", "England - Championship")
