@@ -94,6 +94,9 @@ data_full$Div <- str_replace(data_full$Div, "P1", "Portugal - Primeira Liga")
 data_full$Div <- str_replace(data_full$Div, "T1", "Turkey - Super Lig")
 data_full$Div <- str_replace(data_full$Div, "G1", "Greece - Super League")
 
+data_full$Div1 <- str_replace(data_full$Div1, "D1", "G1")
+data_full$Div1 <- str_replace(data_full$Div1, "D2", "G2")
+
 data_full$Div <- as.factor(data_full$Div)
 
 #------------------------------------------------------------------------#
@@ -359,6 +362,10 @@ data_corners_place <- data_corners_place[, c("Div", "HomeTeam", "no_games_played
 ##  merge datasets  ##
 names(data_corners_place) <- names(data_corners)
 data_corners <- bind_rows(data_corners, data_corners_place)
+
+##  sort data by team name  ##
+data_full <- data_full %>%
+  arrange(Div1, HomeTeam)
 
 #---------------------------------------------------------#
 #                        referees                         #
