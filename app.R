@@ -514,8 +514,8 @@ server <- function(input, output, session) {
         colnames = c("Referee", "No of games", "Average total cards per game", "Average yellow cards per game", 
                      "Average red cards per game", "% of games with >0.5 red cards"),
         options = list(dom = "t",  autoWidth = TRUE, scrollX = TRUE, pageLength = 50, 
-                       columnDefs = list(list(targets = c(0), visible = TRUE, width = "100"),
-                                         list(targets = c(1:4), visible = TRUE, width = "130"))), 
+                       columnDefs = list(list(targets = c(0:1), visible = TRUE, width = "100"),
+                                         list(targets = c(2:5), visible = TRUE, width = "130"))), 
         rownames = FALSE) %>%
       formatRound(columns = c("total_cards_per_game", "yellow_cards_per_game", "red_cards_per_game"), 2) %>% 
       formatPercentage(c("share_over0.5_red_cards"), 0)
